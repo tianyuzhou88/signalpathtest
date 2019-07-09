@@ -1,15 +1,17 @@
 package page;
 
+import core.ultils.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class TwitterLoginPage  {
-    WebDriver driver;
+public class TwitterLoginPage implements Page {
+    protected WebDriver driver;
+
     public TwitterLoginPage(WebDriver driver){
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(this.driver, this);
     }
 
     //webelements for use
@@ -28,5 +30,10 @@ public class TwitterLoginPage  {
         password.sendKeys(_password);
         submit.click();
         return new HomePage(driver);
+    }
+
+    @Override
+    public Boolean isAt() {
+        return submit.isDisplayed();
     }
 }

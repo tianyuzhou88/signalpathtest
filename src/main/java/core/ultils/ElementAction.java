@@ -1,11 +1,14 @@
 package core.ultils;
 
-import core.Base;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ElementAction extends Base {
+import static core.Base.webDriver;
+
+public class ElementAction {
+
     public String getText(WebElement webElement) {
         return webElement.getText();
     }
@@ -17,7 +20,7 @@ public class ElementAction extends Base {
     public void open(String url) {
         webDriver.navigate().to(url);
         this.sleep(1);
-        log.info(" Open Browser，Open "+url+" Address!");
+      //  log.info(" Open Browser，Open "+url+" Address!");
     }
 
     public void sleep(double inSecs) {

@@ -1,18 +1,19 @@
 package page;
 
 import core.ultils.ElementAction;
+import core.ultils.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage {
+public class HomePage implements Page{
     WebDriver driver;
     ElementAction action = new ElementAction();
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(this.driver, this);
     }
 
     @FindBy(css= "b.u-linkComplex-target")
@@ -31,6 +32,7 @@ public class HomePage {
     WebElement signout;
 
     public String twittername(){
+
         action.waitForElement(twittername);
         return action.getText(twittername);
     }
@@ -49,5 +51,10 @@ public class HomePage {
     public void signout(){
         action.waitForElement(signout);
         signout.click();
+    }
+
+    @Override
+    public Boolean isAt() {
+        return signout.isDisplayed();
     }
 }
