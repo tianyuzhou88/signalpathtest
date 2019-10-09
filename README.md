@@ -1,4 +1,3 @@
-# signalpathtest
 
 #using Selenium WebDriver implemented with JAVA 1.8
 #using Maven 4.0 as package management system, dependencies all can be found in pom.xml under the project
