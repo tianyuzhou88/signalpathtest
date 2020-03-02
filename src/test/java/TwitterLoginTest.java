@@ -1,15 +1,10 @@
 import core.Base;
 import core.ultils.Data;
-import domain.UserInfo;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import page.HomePage;
-import page.TwitterLoginPage;
 
 import java.io.IOException;
-
-import static core.Base.webDriver;
 
 public class TwitterLoginTest extends Base{
     TwitterLoginPage loginPage;

@@ -27,8 +27,8 @@ public class Base {
                 WebDriverManager.chromedriver().setup();
                 webDriver = new ChromeDriver();
                 webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                webDriver.get(url+ "/login");
-                log.info("****navigate to twitter login page****");
+                webDriver.get(url);
+                log.info("****navigate to sauce lab demo page****");
         }
     }
 

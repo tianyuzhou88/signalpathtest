@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
 public class BaseTest extends Base {
 
     @Test
-    public void goodtest(){
-
+    public void linkTest(){
        // webDriver.get("http://www.google.com");
         Map<Boolean, List<String>> map= webDriver.findElements(By.xpath("//*[@href]"))  // find all elements which has href attribute
                 .stream()
@@ -21,7 +20,6 @@ public class BaseTest extends Base {
                 .collect(Collectors.partitioningBy(link -> LinkUtil.getResponseCode(link) == 200));
 
         map.get(false)
-                .stream()
                 .forEach(System.out::println);
     }
 

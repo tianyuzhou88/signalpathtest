@@ -1,39 +1,41 @@
 package page;
 
+import core.ultils.ElementAction;
 import core.ultils.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class TwitterLoginPage implements Page {
-    protected WebDriver driver;
+public class LoginPage implements Page {
+    WebDriver driver;
+    ElementAction action = new ElementAction();
 
-    public TwitterLoginPage(WebDriver driver){
+    public LoginPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
     }
 
-    //webelements for use
-    @FindBy(css="#page-container input[name='session[username_or_email]']")
+    @FindBy(css= "input#user-name")
     WebElement username;
 
-    @FindBy(css="#page-container input[name='session[password]']")
+    @FindBy(css= "input#input#password")
     WebElement password;
 
-    @FindBy(css="div button[type='submit']")
+    @FindBy(css= "input.btn_action")
     WebElement submit;
 
+
     //methods
-    public HomePage login(String _username, String _password){
+    public LandingPage login(String _username, String _password){
         username.sendKeys(_username);
         password.sendKeys(_password);
         submit.click();
-        return new HomePage(driver);
+        return new LandingPage(this.driver);
     }
 
     @Override
     public Boolean isAt() {
-        return submit.isDisplayed();
+        return submit.isDisplayed() && action.getUrl().equalsIgnoreCase("https://www.saucedemo.com/");
     }
 }
