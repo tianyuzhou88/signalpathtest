@@ -2,12 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
     <parameter name="Browser" value="chrome" />
-    <parameter name="URL" value="https://saucedemo.com" />
+    <parameter name="URL" value="https://www.saucedemo.com/" />
 
 
     <test name="Creation User">
         <classes>
-            <class name="TwitterLoginTest">
+            <class name="SauceLabUiTest">
             </class>
         </classes>
     </test>

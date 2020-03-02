@@ -1,6 +1,7 @@
 package core.ultils;
 
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,9 +32,9 @@ public class ElementAction {
         }
     }
 
-    public boolean waitForElement(WebElement webElement) {
-        WebDriverWait webDriverWait = new WebDriverWait(webDriver, 60);
-        return webDriverWait.until(ExpectedConditions.visibilityOf(webElement)).isDisplayed();
+    public boolean waitForElement(By by, int timeout) {
+        WebDriverWait webDriverWait = new WebDriverWait(webDriver, timeout);
+        return webDriverWait.until(ExpectedConditions.presenceOfElementLocated(by)).isDisplayed();
     }
 
 }

@@ -9,13 +9,22 @@ import java.io.File;
 import java.io.IOException;
 
 public class Data {
-
-
     @JsonProperty("password")
     private String password;
 
     @JsonProperty("username")
     private String username;
+
+
+    @JsonProperty("first")
+    private String firstName;
+
+    @JsonProperty("last")
+    private String lastName;
+
+
+    @JsonProperty("zip")
+    private String zipCode;
 
     public String getPassword() {
         return password;
@@ -25,8 +34,25 @@ public class Data {
         return username;
     }
 
-    public static Data get(String filename) throws IOException {
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public static Data get(String file) {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(new File(filename), Data.class);
+        try {
+            return mapper.readValue(new File(file), Data.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

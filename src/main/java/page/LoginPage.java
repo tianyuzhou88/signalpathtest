@@ -1,5 +1,6 @@
 package page;
 
+import core.ultils.Data;
 import core.ultils.ElementAction;
 import core.ultils.Page;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +20,7 @@ public class LoginPage implements Page {
     @FindBy(css= "input#user-name")
     WebElement username;
 
-    @FindBy(css= "input#input#password")
+    @FindBy(css= "#password")
     WebElement password;
 
     @FindBy(css= "input.btn_action")
@@ -27,9 +28,9 @@ public class LoginPage implements Page {
 
 
     //methods
-    public LandingPage login(String _username, String _password){
-        username.sendKeys(_username);
-        password.sendKeys(_password);
+    public LandingPage login(Data data){
+        username.sendKeys(data.getUsername());
+        password.sendKeys(data.getPassword());
         submit.click();
         return new LandingPage(this.driver);
     }
