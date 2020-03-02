@@ -1,20 +1,21 @@
+**java 1.8, maven 3+ is needed to run the test**
 
-#using Selenium WebDriver implemented with JAVA 1.8
-#using Maven 4.0 as package management system, dependencies all can be found in pom.xml under the project
-#JAVA 1.8 is required
-#maven is required 
-#
-tested twitter log-in functionalities
+steps
 
-to run the test
 1. git clone the project to local (pulic ssh)
 2. mvm clean install (if you have maven in your local), from intellij go to view -> maven -> life cyle
-click clean first to remove all the depency then install
-3. mvn test or test from intellij  #eclipse not welcome :(#
-
-option 2
-1. download .zip file, import into intellij as maven project
-2. download all the dependency
-3. run testng.xml
+3. click clean first to remove all the depency then install
 
 
+
+about:
+
+1.  ```pom.xml``` is the derectory root
+2.  ```testng.xml``` contains testing parameter, ```$Browser``` takes either chrome or firefox
+3. WebDriverManager will control the version of browser using during runtime, it will download lastest relesae version of driver from w3c supported driver
+4. test is run regardless of running OS, support windows, linux (*not tested*) and mac os (**recommended**).
+5. filter is the generic string to filter whatever user/tester wants to pass in. in this case, i am demostrating useing "t-shirts". but it will take anything. if no found ,will throw ```"filtered item is not found"``` error
+6.  ```test.json``` under ```src/core/java/data/``` extracting data from service layer. testing is orientated through service layer and logic validation
+7. issues found: starndard_user does not have time out, shipping information page has not regex validation. 
+8. I did not use inheritance to extend driver. composition vs inheritance is big thing. I do not want to abuse inheritance usage. the place I demostrator oop is landing page as base page since it contains left menu bar, little cart icon and footer.
+  

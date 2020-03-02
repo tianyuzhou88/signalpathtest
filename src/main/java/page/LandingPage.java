@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.ITestContext;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,10 +18,20 @@ import java.util.stream.Collectors;
 public class LandingPage implements Page {
     protected WebDriver driver;
     private String filter;
+    private double totalPrice;
     protected ElementAction action = new ElementAction();
+    private int itemCount;
+
+    public int getItemCount() {
+        return itemCount;
+    }
 
     public void setFilter(String filter) {
         this.filter = filter;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
     LandingPage(WebDriver driver) {
@@ -47,13 +58,11 @@ public class LandingPage implements Page {
 
     }
 
-    private int itemPrice(int index){
+    private double itemPrice(int index){
         String price = this.driver.findElement(By.cssSelector(String.format("#inventory_container " +
                 "> div > div:nth-child(%s) > div.pricebar > div",index))).getText();
-        Pattern p = Pattern.compile("(\\d+\\.\\d{1,2})");
-        Matcher m = p.matcher(price);
-        System.out.println(Integer.parseInt(m.group(0)));
-        return Integer.parseInt(m.group(0));
+        price= price.substring(1);
+        return Double.parseDouble(price);
     }
 
     protected List<Integer> filteredResultIndex (){
@@ -71,20 +80,18 @@ public class LandingPage implements Page {
         return filteredIndexList;
     }
 
-    public boolean bulkAddFilteredToCart(){
+    public boolean bulkAddFilteredToCart(ITestContext context){
         this.filteredResultIndex().forEach(i -> {
             addToCart(i).click();
             Assert.assertTrue(addToCart(i).getText().equalsIgnoreCase("REMOVE"));
         });
-        return Integer.parseInt(this.cartItemsCount.getText()) == filteredResultIndex().size();
-    }
-
-    int totalPrice(){
-        int totalPrice = 0;
-        for (Integer i : this.filteredResultIndex()) {
+        for (int i : this.filteredResultIndex()) {
             totalPrice+=this.itemPrice(i);
         }
-        return totalPrice;
+        itemCount = filteredResultIndex().size();
+        context.setAttribute("totalPrice", getTotalPrice());
+        context.setAttribute("itemCount", getItemCount());
+        return Integer.parseInt(this.cartItemsCount.getText()) == filteredResultIndex().size();
     }
 
     public CartPage naviagateCartPage(){

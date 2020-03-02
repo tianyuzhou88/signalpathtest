@@ -35,8 +35,12 @@ public class InfoPage extends LandingPage{
         lastName.sendKeys(data.getLastName());
         zip.sendKeys(data.getZipCode());
         continueButton.click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new ConfirmationPage(driver);
-
     }
 
 }

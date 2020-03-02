@@ -26,8 +26,6 @@ public class LoginPage implements Page {
     @FindBy(css= "input.btn_action")
     WebElement submit;
 
-
-    //methods
     public LandingPage login(Data data){
         username.sendKeys(data.getUsername());
         password.sendKeys(data.getPassword());

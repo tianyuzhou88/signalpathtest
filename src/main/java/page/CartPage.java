@@ -20,6 +20,7 @@ public class CartPage extends LandingPage {
 
     public InfoPage checkoutInfo(){
         Assert.assertEquals(driver.findElements(items).size(), Integer.parseInt(super.cartItemsCount.getText()));
+        checkout.click();
         return new InfoPage(driver);
     }
 
